@@ -1,0 +1,120 @@
+<polymer-element name="ceci-audiotwo" attributes="source speed label value drumcolor backgroundcolor stickcolor"
+  drumcolor="#FFFFFF"
+  stickcolor="#000000"
+  backgroundcolor="#ff9900"
+  value="Click" extends="ceci-element"
+  speed="1.0">
+  <ceci-definition>
+    {
+      "tags": ["button", "click", "tap"],
+      "thumbnail": "./thumbnail.png",
+      "description": "Broadcasts a \"click\" when clicked.",
+      "name": "AudioTwo",
+      "broadcasts": {
+        "click": {
+          "label": "Click",
+          "description": "Occurs when button is clicked."
+        }
+      },
+      "listeners": {
+        "kick": {
+          "description": "Causes a fake click event to occur.",
+          "label": "Kick",
+          "default": true
+        },
+        "speed": {
+          "description": "Sets the playback rate for the audio clip.",
+          "label": "setSpeed"
+        }
+      },
+      "attributes": {
+        "speed": {
+          "label": "Audio playback rate.",
+          "description": "1 for normal speed, 2 for twice speed, -1 for reverse, etc.",
+          "editable": "number"
+        },
+        "value": {
+          "label": "Value",
+          "description": "Value sent by the button.",
+          "editable": "text"
+        },
+        "stickcolor": {
+          "label": "Stick Color",
+          "editable": "color"
+        },
+        "backgroundcolor": {
+          "label": "Background Color",
+          "editable": "color"
+        },
+        "drumcolor": {
+          "label": "Drum Color",
+          "description": "Color of the drum.",
+          "editable": "color"
+        }
+      }
+    }
+  </ceci-definition>
+  <template>
+    <link rel="stylesheet" href="component.css"></link>
+    <div id="kick" class="off" on-mousedown="{{kickon}}" on-mouseup="{{kickoff}}">
+      <div id="drum"></div>
+      <div id="stick"></div>
+    </div>
+    <audio id="kicksound" src="sounds/snare.mp3" preload=preload></audio>
+    <shadow></shadow>
+  </template>
+  <script>
+    Polymer('ceci-audiotwo', {
+      ready: function () {
+        this.super();
+        var that = this;
+      },
+      kickon: function () {
+        this.$.kicksound.pause();
+        this.$.kicksound.currentTime = 0;
+        this.$.kicksound.play();
+        this.$.kick.classList.add("hit");
+      },
+      kick : function(){
+        this.kickon();
+        var that = this;
+        window.setTimeout(function(){
+          that.kickoff();
+        },100)
+      },
+      kickoff : function(){
+        this.$.kick.classList.remove("hit");
+      },
+      snare: function () {
+        this.$.snare.pause();
+        this.$.snare.currentTime = 0;
+        this.$.snare.play();
+      },
+      sourceChanged: function(oldValue, newValue) {
+        this.$.clip.src = newValue;
+      },
+      setSpeed: function(channel, value) {
+        this.speedChanged(this.$.snare.playbackRate || 1, value);
+        this.speedChanged(this.$.kick.playbackRate || 1, value);
+      },
+      speedChanged: function(oldValue, newValue) {
+        try  {
+          var f = parseFloat(newValue);
+          if (f) {
+            this.$.kick.playbackRate = parseFloat(newValue);
+            this.$.snare.playbackRate = parseFloat(newValue);
+          }
+        } catch (e) {}
+      },
+      stickcolorChanged: function (oldValue, newValue) {
+        this.$.stick.style.background = newValue;
+      },
+      drumcolorChanged: function (oldValue, newValue) {
+        this.$.drum.style.background = newValue;
+      },
+      backgroundcolorChanged: function (oldValue, newValue) {
+        this.$.kick.style.background = newValue;
+      }
+    });
+  </script>
+</polymer-element>

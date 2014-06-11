@@ -1,0 +1,74 @@
+:host {
+  display: block;
+  width: 100%;
+  background: orange;
+}
+
+:host #kick {
+  height: 75px;
+  display: block;
+  cursor: pointer;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+:host #kick, :host #kick * {
+
+}
+
+:host #drum {
+  height: 200px;
+  width: 200px;
+  background: white;
+  position: absolute;
+  left: calc(50% - 100px);
+  border-radius: 150px;
+  top: -20px;
+  -webkit-transform: scaleY(.4);
+}
+
+:host #stick {
+  height: 8px;
+  width: 120px;
+  background: black;
+  position: absolute;
+  left: 40px;
+  top: 20px;
+  border-radius: 100px;
+  -webkit-transform-origin: left;
+}
+
+:host .hit #stick {
+/*  -webkit-animation: stickhit .2s linear;*/
+  top: 25px;
+  -webkit-transform: rotate(15deg);
+}
+
+:host .hit #drum {
+  top: -15px;
+/*  -webkit-animation: drumhit .2s linear;*/
+}
+
+@-webkit-keyframes drumhit {
+  0% { top: -20px;}
+  20% { top: -20px;}
+  30% { top: -15px;}
+  100% { top: -20px;}
+}
+
+
+
+@-webkit-keyframes stickhit {
+  0% { -webkit-transform: rotate(0deg);}
+  20% { -webkit-transform: rotate(20deg);}
+  100% { -webkit-transform: rotate(00deg);}
+}
+
+:host #kick.on {
+
+}
+
+:host audio {
+  display: none;
+}
