@@ -1,4 +1,4 @@
-<polymer-element name="ceci-audiotwo" attributes="source speed label value drumcolor backgroundcolor stickcolor"
+<polymer-element name="ceci-snaredrum" attributes="source speed label value drumcolor backgroundcolor stickcolor"
   drumcolor="#FFFFFF"
   stickcolor="#000000"
   backgroundcolor="#ff9900"
@@ -9,7 +9,7 @@
       "tags": ["button", "click", "tap"],
       "thumbnail": "./thumbnail.png",
       "description": "Broadcasts a \"click\" when clicked.",
-      "name": "AudioTwo",
+      "name": "Snare Drum",
       "broadcasts": {
         "click": {
           "label": "Click",
@@ -64,7 +64,7 @@
     <shadow></shadow>
   </template>
   <script>
-    Polymer('ceci-audiotwo', {
+    Polymer('ceci-snaredrum', {
       ready: function () {
         this.super();
         var that = this;
