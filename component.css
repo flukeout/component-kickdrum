@@ -1,72 +1,81 @@
 :host {
   display: block;
   width: 100%;
-  background: orange;
 }
 
 :host #kick {
+  overflow: hidden;
   height: 75px;
   display: block;
   cursor: pointer;
-  overflow: hidden;
   width: 100%;
   position: relative;
 }
 
-:host #kick, :host #kick * {
-
+:host #drum {
+  position: absolute;
+  background: red;
+  left: 0;
+  top:0;
+  height: 100%;
+  width: 50%;
 }
 
-:host #drum {
-  height: 200px;
-  width: 200px;
-  background: white;
+:host #face {
   position: absolute;
-  left: calc(50% - 100px);
-  border-radius: 150px;
-  top: -20px;
-  -webkit-transform: scaleY(.4);
+  background: white;
+  width: 200px;
+  height: 200px;
+  top: calc(50% - 100px);
+  -webkit-border-radius: 200px;
+     -moz-border-radius: 200px;
+          border-radius: 200px;
+  right: -100px;
+  -webkit-transform: scaleX(.5);
+  -moz-transform: scaleX(.5);
+  transform: scaleX(.5);
+  border: solid 25px red;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 :host #stick {
-  height: 8px;
-  width: 120px;
+  position: absolute;
+  width: 8px;
+  background: black;
+  height: 50px;
+  bottom: -4px;
+  left: calc(50% + 5px);
+  -webkit-transform-origin: bottom;
+  -moz-transform-origin: bottom;
+  transform-origin: bottom;
+  -webkit-transform: rotate(15deg);
+  -moz-transform: rotate(15deg);
+  transform: rotate(15deg);
+}
+
+:host #ball {
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  width: 20px;
+  height: 20px;
   background: black;
   position: absolute;
-  left: 40px;
-  top: 20px;
-  border-radius: 100px;
-  -webkit-transform-origin: left;
+  top: -4px;
+  left: calc(50% - 10px);
 }
 
-:host .hit #stick {
-/*  -webkit-animation: stickhit .2s linear;*/
-  top: 25px;
-  -webkit-transform: rotate(15deg);
+:host .on #face {
+  right: -95px;
 }
 
-:host .hit #drum {
-  top: -15px;
-/*  -webkit-animation: drumhit .2s linear;*/
-}
-
-@-webkit-keyframes drumhit {
-  0% { top: -20px;}
-  20% { top: -20px;}
-  30% { top: -15px;}
-  100% { top: -20px;}
-}
-
-
-
-@-webkit-keyframes stickhit {
-  0% { -webkit-transform: rotate(0deg);}
-  20% { -webkit-transform: rotate(20deg);}
-  100% { -webkit-transform: rotate(00deg);}
-}
-
-:host #kick.on {
-
+:host .on #stick {
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  transform: rotate(0deg);
+  left: 50%;
 }
 
 :host audio {
